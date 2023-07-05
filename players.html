@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo&display=swap" rel="stylesheet">
+  <title>Docs Movie Mil</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+  
+    html, body {
+      background-color: #10151d;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Heebo', sans-serif;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      flex-direction: column;
+      color: #ffffff;
+    }
+
+    .container h2 {
+      color: #ffffff;
+      font-size: 25px;
+      font-weight: 300;
+      margin-top: 200px;
+    }
+
+    .botoes {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .button1 {
+      background-color: #e91e63;
+      width: 200px;
+      height: 50px;
+      margin-right: 10px;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100px;
+      font-size: 20px;
+      font-weight: 300;
+    }
+
+    .button2 {
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 200px;
+      height: 50px;
+      margin-left: 10px;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #e91e63;
+      border-radius: 100px;
+      font-size: 20px;
+      font-weight: 300;
+    }
+
+    .button2:hover {
+      background-color: #e91e63;
+    }
+
+    .background {
+      position:fixed;
+      width:100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .stream {
+      background-color: #e91e63;
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-left: 10px;
+      width: 50px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0px 0px 10px 10px;
+    }
+
+    .stream svg {
+      width: 25px;
+      height: 25px;
+      fill: #ffffff;
+      font-weight: 900;
+    }
+
+    .footer {
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      height: 70px;
+      position: fixed;
+      z-index: 900;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 200;
+    }
+  </style>
+</head>
+
+<body>
+ <img class="background" src="" alt="Background Image"/>
+  <div class="container">
+    <h2 class="nome"></h2>
+
+    <div class="botoes">
+      <div class="button1">Player 1</div>
+      <div class="button2">Player 2</div>
+    </div>
+  </div>
+
+  <script>
+    // Função para obter o ID do filme a partir da URL
+    function getMovieIdFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('mv');
+    }
+
+    // Função para fazer a requisição à API do The Movie DB e obter os detalhes do filme
+function getMovieDetails(movieId) {
+  const apiKey = 'dd8b9b0ba16a7a2e167615c6de0d99a0';
+  const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=pt-BR`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const movieTitle = data.title;
+      const moviePosterPath = data.poster_path;
+      const movieBackdropPath = data.backdrop_path;
+
+      // Atualize o título da página
+      document.title = movieTitle;
+
+      // Atualize a div de class "nome" com o nome do filme
+      const nomeDiv = document.querySelector('.nome');
+      nomeDiv.textContent = movieTitle;
+
+      // Atualize a imagem com o banner do filme
+      const posterUrl = `https://image.tmdb.org/t/p/original${movieBackdropPath}`;
+      const img = document.querySelector('.background');
+      img.setAttribute('src', posterUrl);
+    })
+    .catch(error => console.log(error));
+}
+
+
+
+
+
+
+    // Função para redirecionar para o link do Player 1
+    function redirectToPlayer1(id) {
+      const player1Url = `https://mplayer1.vercel.app/?vd=${id}`;
+      window.location.href = player1Url;
+    }
+
+    // Função para redirecionar para o link do Player 2
+    function redirectToPlayer2(id) {
+      const player2Url = `https://mplayer2.vercel.app/?vd=${id}`;
+      window.location.href = player2Url;
+    }
+
+    // Função de inicialização
+    function initialize() {
+      const movieId = getMovieIdFromUrl();
+      if (movieId) {
+        getMovieDetails(movieId);
+      }
+
+      // Adicione o evento de clique para redirecionar para o Player 1
+      const button1 = document.querySelector('.button1');
+      button1.addEventListener('click', function() {
+        redirectToPlayer1(movieId);
+      });
+
+      // Adicione o evento de clique para redirecionar para o Player 2
+      const button2 = document.querySelector('.button2');
+      button2.addEventListener('click', function() {
+        redirectToPlayer2(movieId);
+      });
+    }
+
+    // Inicialize o script após o carregamento do DOM
+    document.addEventListener('DOMContentLoaded', initialize);
+  </script>
+</body>
+
+</html>
