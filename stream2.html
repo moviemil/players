@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    		
+    <title>Tio Flix Br Player 2</title>
+    <meta content='Veja Os Melhores e mais Recentes Filmes Aqui! no Tio Flix Br' name='description'/>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+html, body{
+  background-color: #000;
+}
+
+.opss{
+background-color:#10151d;
+width:100%;
+height:100%;
+z-index:900;
+display:none;
+position:fixed;
+z-index:900;
+justify-content:center;
+align-items:center;
+color:#fff;
+flex-direction:column;
+}
+.opss h3{
+margin-top:20px;
+font-size:30px;
+font-weight:500;
+}
+.opss img{
+width:200px;
+}
+.oprr{
+background-color:#10151d;
+width:100%;
+height:100%;
+z-index:900;
+display:flex;
+position:fixed;
+z-index:900;
+justify-content:center;
+align-items:center;
+color:#fff;
+flex-direction:column;
+}
+.preload-container {
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #10151d;
+  overflow-y: hidden;
+  flex-direction: column;
+}
+.preloadC{
+      width: 100%;
+  height: 100%;
+   flex-direction: column;
+   display:flex;
+justify-content: center;
+align-items: center;
+      }
+.preload-spinner {
+  margin-left:55px;
+  transform: translate(-50%, -50%);
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #e91e63;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+.preload-message {
+  margin-left:78px;
+  transform: translate(-50%, -50%);
+  color: #f3f3f3;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.psload{
+background-color:#10151d;
+width:100%;
+height:100vh;
+z-index:900;
+display:flex;
+position:fixed;
+z-index:900;
+justify-content:center;
+align-items:center;
+color:#fff;
+flex-direction:column;
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+#video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+        }
+   </style>
+  </head>
+  <body>
+
+<div class="psload">
+<div class="opss">
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoV-s5RB5NZvyHw8bIT-k5NpsL20PJ-N-iAAFH8jmnHmMZT-J83HfN9zlxvU_SbgtNVIVLX6-PUHe5kMoBZq0MEjrx0WA6dqiH-m04kP1a77-XnD3VjWhsg10Ag84D8w8rOGQZq3unJLL5mDyER6v94pGi_XwsMvsvM5CTALJkqNh6hLj3bh6O-yKRGwLE/s1600/20230704_000002.png"/>
+<h3>Ops! Filme Indisponível</h3>
+</div>
+<div class="oprr">
+ <div class='preload-container' id='preload'>
+          <div class='preloadC'>
+  <div class='preload-spinner'></div>
+  <p class='preload-message'>Loading</p>
+  </div>
+</div>
+</div>
+</div>
+   
+     <div id="video-container">
+        <video id="video-id"></video>
+    </div>
+        <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+    <script>
+  var _0x916a=["\x73\x65\x61\x72\x63\x68","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x76\x64","\x67\x65\x74","\x74\x69\x74\x6C\x65","\x73\x74\x73","\x4F\x66\x66","\x45\x73\x73\x65\x20\x46\x69\x6C\x6D\x65\x20\x65\x73\x74\xE1\x20\x4F\x66\x66","\x68\x72\x65\x66","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x6D\x6F\x76\x69\x65\x6D\x69\x6C\x2E\x62\x6C\x6F\x67\x73\x70\x6F\x74\x2E\x63\x6F\x6D","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x73\x63\x72\x69\x70\x74\x2E\x67\x6F\x6F\x67\x6C\x65\x2E\x63\x6F\x6D\x2F\x6D\x61\x63\x72\x6F\x73\x2F\x73\x2F\x41\x4B\x66\x79\x63\x62\x79\x72\x55\x74\x2D\x55\x4A\x4E\x4B\x66\x41\x47\x4A\x37\x63\x48\x33\x74\x65\x53\x6F\x62\x39\x5A\x4E\x61\x46\x37\x34\x58\x33\x42\x6B\x75\x5A\x37\x51\x57\x67\x41\x74\x6C\x7A\x32\x50\x31\x6F\x4E\x41\x46\x72\x33\x4E\x46\x53\x31\x49\x6C\x37\x46\x54\x4D\x71\x67\x45\x50\x2F\x65\x78\x65\x63","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x61\x70\x69\x2E\x74\x68\x65\x6D\x6F\x76\x69\x65\x64\x62\x2E\x6F\x72\x67\x2F\x33\x2F","\x64\x64\x38\x62\x39\x62\x30\x62\x61\x31\x36\x61\x37\x61\x32\x65\x31\x36\x37\x36\x31\x35\x63\x36\x64\x65\x30\x64\x39\x39\x61\x30","\x46\x75\x6E\x63\x74\x69\x6F\x6E","\x45\x78\x70\x6F\x72\x74\x4A\x53\x4F\x4E","\x61\x70\x70\x65\x6E\x64","\x70\x61\x67\x65","\x46\x69\x6C\x6D\x65\x73","\x45\x72\x72\x6F\x20\x61\x6F\x20\x63\x61\x72\x72\x65\x67\x61\x72\x20\x6F\x20\x4A\x53\x4F\x4E\x3A","\x6C\x6F\x67","\x63\x61\x74\x63\x68","\x49\x44","\x66\x69\x6E\x64","\x73\x74\x72\x65\x61\x6D","\x6D\x70\x34","\x70\x6C\x61\x79\x65\x72","\x64\x72\x69\x76\x65","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x77\x77\x77\x2E\x67\x6F\x6F\x67\x6C\x65\x61\x70\x69\x73\x2E\x63\x6F\x6D\x2F\x64\x72\x69\x76\x65\x2F\x76\x33\x2F\x66\x69\x6C\x65\x73\x2F","\x3F\x6B\x65\x79\x3D\x41\x49\x7A\x61\x53\x79\x44\x59\x35\x5F\x69\x56\x2D\x39\x48\x48\x6D\x32\x75\x33\x62\x59\x65\x66\x35\x73\x5A\x35\x4B\x63\x35\x4A\x64\x5F\x34\x77\x65\x39\x73\x26\x61\x6C\x74\x3D\x6D\x65\x64\x69\x61","\x76\x69\x64\x65\x6F\x2D\x69\x64","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x69\x6E\x6E\x65\x72\x48\x54\x4D\x4C","\x3C\x73\x6F\x75\x72\x63\x65\x20\x73\x72\x63\x3D\x22","\x22\x20\x74\x79\x70\x65\x3D\x22\x76\x69\x64\x65\x6F\x2F\x6D\x70\x34\x22\x3E","\x6F\x6E\x6C\x6F\x61\x64\x65\x64\x64\x61\x74\x61","\x2E\x70\x73\x6C\x6F\x61\x64","\x71\x75\x65\x72\x79\x53\x65\x6C\x65\x63\x74\x6F\x72","\x66\x61\x64\x65\x2D\x6F\x75\x74","\x61\x64\x64","\x63\x6C\x61\x73\x73\x4C\x69\x73\x74","\x61\x6E\x69\x6D\x61\x74\x69\x6F\x6E\x65\x6E\x64","\x64\x69\x73\x70\x6C\x61\x79","\x73\x74\x79\x6C\x65","\x6E\x6F\x6E\x65","\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72","\x45\x6C\x65\x6D\x65\x6E\x74\x6F\x20\x63\x6F\x6D\x20\x61\x20\x63\x6C\x61\x73\x73\x65\x20\x27\x70\x73\x6C\x6F\x61\x64\x27\x20\x6E\xE3\x6F\x20\x65\x6E\x63\x6F\x6E\x74\x72\x61\x64\x6F\x2E","\x45\x72\x72\x6F\x20\x61\x6F\x20\x6F\x62\x74\x65\x72\x20\x6F\x20\x74\xED\x74\x75\x6C\x6F\x20\x65\x20\x6F\x20\x62\x61\x6E\x6E\x65\x72\x20\x64\x6F\x20\x66\x69\x6C\x6D\x65\x3A","\x62\x61\x63\x6B\x64\x72\x6F\x70\x5F\x70\x61\x74\x68","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x69\x6D\x61\x67\x65\x2E\x74\x6D\x64\x62\x2E\x6F\x72\x67\x2F\x74\x2F\x70\x2F\x6F\x72\x69\x67\x69\x6E\x61\x6C","","\x70\x6F\x73\x74\x65\x72","\x73\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x2E\x6F\x70\x73\x73","\x2E\x6F\x70\x72\x72","\x66\x6C\x65\x78","\x45\x6C\x65\x6D\x65\x6E\x74\x6F\x73\x20\x27\x6F\x70\x73\x73\x27\x20\x6F\x75\x20\x27\x6F\x70\x72\x72\x27\x20\x6E\xE3\x6F\x20\x65\x6E\x63\x6F\x6E\x74\x72\x61\x64\x6F\x73\x2E","\x23\x65\x39\x31\x65\x36\x33","\x6D\x70\x34\x55\x72\x6C","\x67\x64\x49\x44","\x74\x68\x65\x6E","\x6A\x73\x6F\x6E","\x6D\x6F\x76\x69\x65\x2F","\x3F\x61\x70\x69\x5F\x6B\x65\x79\x3D","\x26\x6C\x61\x6E\x67\x75\x61\x67\x65\x3D\x70\x74\x2D\x42\x52","\x46\x69\x6C\x6D\x65\x20\x6E\xE3\x6F\x20\x65\x6E\x63\x6F\x6E\x74\x72\x61\x64\x6F\x21","\x50\x4F\x53\x54"];function getMovieIDFromURL(){const _0x15f3x2= new URLSearchParams(window[_0x916a[1]][_0x916a[0]]);return _0x15f3x2[_0x916a[3]](_0x916a[2])}function setDocumentTitle(_0x15f3x4){if(_0x15f3x4&& _0x15f3x4[_0x916a[4]]){document[_0x916a[4]]= _0x15f3x4[_0x916a[4]]}}function checkVideoStatus(_0x15f3x4){if(_0x15f3x4&& _0x15f3x4[_0x916a[5]]=== _0x916a[6]){alert(_0x916a[7]);window[_0x916a[1]][_0x916a[8]]= _0x916a[9]}}const jsonUrl=_0x916a[10];const apiBaseUrl=_0x916a[11];const apiKey=_0x916a[12];const formData= new FormData();formData[_0x916a[15]](_0x916a[13],_0x916a[14]);formData[_0x916a[15]](_0x916a[16],_0x916a[17]);fetch(jsonUrl,{method:_0x916a[65],body:formData})[_0x916a[59]]((_0x15f3x18)=>{return _0x15f3x18[_0x916a[60]]()})[_0x916a[59]]((_0x15f3xb)=>{const _0x15f3xc=getMovieIDFromURL();const _0x15f3xd=_0x15f3xb[_0x916a[22]]((_0x15f3xe)=>{return _0x15f3xe[_0x916a[21]].toString()=== _0x15f3xc});if(_0x15f3xd){checkVideoStatus(_0x15f3xd);let _0x15f3xf;if(_0x15f3xd[_0x916a[23]]=== _0x916a[24]){_0x15f3xf= _0x15f3xd[_0x916a[25]]}else {if(_0x15f3xd[_0x916a[23]]=== _0x916a[26]){_0x15f3xf= `${_0x916a[27]}${_0x15f3xd[_0x916a[25]]}${_0x916a[28]}`}};const _0x15f3x10=document[_0x916a[30]](_0x916a[29]);_0x15f3x10[_0x916a[31]]= `${_0x916a[32]}${_0x15f3xf}${_0x916a[33]}`;_0x15f3x10[_0x916a[34]]= function(){const _0x15f3x11=document[_0x916a[36]](_0x916a[35]);if(_0x15f3x11){_0x15f3x11[_0x916a[39]][_0x916a[38]](_0x916a[37]);_0x15f3x11[_0x916a[44]](_0x916a[40],function(){_0x15f3x11[_0x916a[42]][_0x916a[41]]= _0x916a[43]})}else {console[_0x916a[19]](_0x916a[45])}};fetch(`${_0x916a[49]}${apiBaseUrl}${_0x916a[61]}${_0x15f3xd[_0x916a[21]]}${_0x916a[62]}${apiKey}${_0x916a[63]}`)[_0x916a[59]]((_0x15f3x18)=>{return _0x15f3x18[_0x916a[60]]()})[_0x916a[59]]((_0x15f3xb)=>{const _0x15f3x12=_0x15f3xb[_0x916a[4]];const _0x15f3x13=_0x15f3xb[_0x916a[47]];const _0x15f3x14=`${_0x916a[48]}${_0x15f3x13}${_0x916a[49]}`;document[_0x916a[4]]= _0x15f3x12;_0x15f3x10[_0x916a[51]](_0x916a[50],_0x15f3x14);const _0x15f3x15=document[_0x916a[36]](_0x916a[52]);const _0x15f3x16=document[_0x916a[36]](_0x916a[53]);if(_0x15f3x15&& _0x15f3x16){if(_0x15f3x15[_0x916a[42]][_0x916a[41]]!== _0x916a[43]&& _0x15f3x15[_0x916a[42]][_0x916a[41]]!== _0x916a[49]){if(_0x15f3xd){_0x15f3x16[_0x916a[42]][_0x916a[41]]= _0x916a[54]}else {_0x15f3x16[_0x916a[42]][_0x916a[41]]= _0x916a[43]}}else {if(_0x15f3xd){_0x15f3x16[_0x916a[42]][_0x916a[41]]= _0x916a[49]}else {_0x15f3x16[_0x916a[42]][_0x916a[41]]= _0x916a[54]}}}else {console[_0x916a[19]](_0x916a[55])};var _0x15f3x17=fluidPlayer(_0x916a[29],{"\x6C\x61\x79\x6F\x75\x74\x43\x6F\x6E\x74\x72\x6F\x6C\x73":{"\x63\x6F\x6E\x74\x72\x6F\x6C\x42\x61\x72":{"\x61\x75\x74\x6F\x48\x69\x64\x65\x54\x69\x6D\x65\x6F\x75\x74":3,"\x61\x6E\x69\x6D\x61\x74\x65\x64":true,"\x61\x75\x74\x6F\x48\x69\x64\x65":true},"\x68\x74\x6D\x6C\x4F\x6E\x50\x61\x75\x73\x65\x42\x6C\x6F\x63\x6B":{"\x68\x74\x6D\x6C":null,"\x68\x65\x69\x67\x68\x74":null,"\x77\x69\x64\x74\x68":null},"\x61\x75\x74\x6F\x50\x6C\x61\x79":false,"\x6D\x75\x74\x65":false,"\x61\x6C\x6C\x6F\x77\x54\x68\x65\x61\x74\x72\x65":false,"\x70\x6C\x61\x79\x50\x61\x75\x73\x65\x41\x6E\x69\x6D\x61\x74\x69\x6F\x6E":false,"\x70\x6C\x61\x79\x62\x61\x63\x6B\x52\x61\x74\x65\x45\x6E\x61\x62\x6C\x65\x64":true,"\x61\x6C\x6C\x6F\x77\x44\x6F\x77\x6E\x6C\x6F\x61\x64":false,"\x70\x6C\x61\x79\x42\x75\x74\x74\x6F\x6E\x53\x68\x6F\x77\x69\x6E\x67":true,"\x66\x69\x6C\x6C\x54\x6F\x43\x6F\x6E\x74\x61\x69\x6E\x65\x72":true,"\x70\x6F\x73\x74\x65\x72\x49\x6D\x61\x67\x65":_0x916a[49],"\x70\x72\x69\x6D\x61\x72\x79\x43\x6F\x6C\x6F\x72":_0x916a[56]},"\x76\x61\x73\x74\x4F\x70\x74\x69\x6F\x6E\x73":{"\x61\x64\x4C\x69\x73\x74":[],"\x61\x64\x43\x54\x41\x54\x65\x78\x74":false,"\x61\x64\x43\x54\x41\x54\x65\x78\x74\x50\x6F\x73\x69\x74\x69\x6F\x6E":_0x916a[49]}});setDocumentTitle(_0x15f3xd);delete _0x15f3xd[_0x916a[57]];delete _0x15f3xd[_0x916a[58]]})[_0x916a[20]]((_0x15f3xa)=>{console[_0x916a[19]](_0x916a[46],_0x15f3xa)})}else {console[_0x916a[19]](_0x916a[64]);const _0x15f3x15=document[_0x916a[36]](_0x916a[52]);const _0x15f3x16=document[_0x916a[36]](_0x916a[53]);if(_0x15f3x15&& _0x15f3x16){_0x15f3x15[_0x916a[42]][_0x916a[41]]= _0x916a[54];_0x15f3x16[_0x916a[42]][_0x916a[41]]= _0x916a[43]}else {console[_0x916a[19]](_0x916a[55])}}})[_0x916a[20]]((_0x15f3xa)=>{console[_0x916a[19]](_0x916a[18],_0x15f3xa)})
+</script>
+
+  </body>
+</html>
